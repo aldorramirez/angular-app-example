@@ -5,9 +5,14 @@
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          [checked]="selection.isSelected(row)"
+          (click) = "showPerson(row)"
+        ></mat-checkbox>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="name">

@@ -5,8 +5,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import {MatCheckboxModule} from "@angular/material/checkbox"
 import { People } from '@data/people.data';
 import { Person } from '@models/person.model';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-people-table',
@@ -18,13 +20,16 @@ import { Person } from '@models/person.model';
     MatTableModule,
     MatInputModule,
     MatSortModule,
+    MatCheckboxModule
   ],
   templateUrl: './people-table.component.html',
   styleUrls: ['./people-table.component.scss'],
 })
 export class PeopleTableComponent implements AfterViewInit {
+  selection = new SelectionModel<Person>(true, [])
+
   displayedColumns: string[] = [
-    'id',
+    "select",
     'name',
     'category',
     'company',
@@ -40,6 +45,10 @@ export class PeopleTableComponent implements AfterViewInit {
     const users = People;
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+  }
+
+  showPerson(row: any){
+    console.log(row)
   }
 
   ngAfterViewInit() {
